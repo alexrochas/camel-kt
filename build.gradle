@@ -38,7 +38,7 @@ task cucumber() {
         javaexec {
             main = "cucumber.api.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'br.com.agibank.cartoes.cliente', 'src/test/resources/features']
+            args = ['--plugin', 'pretty', '--glue', 'br.com.alex.camel.kt', 'src/test/resources/features']
         }
     }
 }
