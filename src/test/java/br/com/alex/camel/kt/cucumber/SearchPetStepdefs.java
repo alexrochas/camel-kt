@@ -39,7 +39,7 @@ public class SearchPetStepdefs extends TestConfig implements En {
       HttpHeaders headers = new HttpHeaders();
       headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
       headers.setContentType(MediaType.APPLICATION_JSON);
-      HttpEntity<List<PetDto>> entity = new HttpEntity<>(headers);
+      HttpEntity<Object> entity = new HttpEntity<Object>(world.map.getOrDefault("request", ""), headers);
       ResponseEntity<List<PetDto>> response = restTemplate
               .exchange("http://localhost:" + port + endpoint, ((Map<String, HttpMethod>) world.map.get("verbs")).get(verb), entity, typeReference);
       world.map.put("response", response);

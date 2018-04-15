@@ -15,7 +15,7 @@ public class InsertPetStepdefs implements En {
 
   public InsertPetStepdefs() {
     And("^a new Pet named (.*)$", (String name) -> {
-      world.map.put("pet", new PetDto(name));
+      world.map.put("request", new PetDto(name));
     });
 
     And("^return inserted Pet with name (.*)$", (name) -> {

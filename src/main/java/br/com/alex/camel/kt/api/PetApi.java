@@ -1,11 +1,13 @@
 package br.com.alex.camel.kt.api;
 
+import br.com.alex.camel.kt.dto.PetDto;
 import br.com.alex.camel.kt.repository.PetRepository;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,8 +22,8 @@ public class PetApi {
   }
 
   @PostMapping
-  public ResponseEntity<?> addPet() {
-    return ResponseEntity.ok(Lists.newArrayList());
+  public ResponseEntity<?> addPet(@RequestBody PetDto pet) {
+    return ResponseEntity.ok(Lists.newArrayList(pet));
   }
 
 }
