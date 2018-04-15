@@ -3,6 +3,7 @@ package br.com.alex.camel.kt.api;
 import br.com.alex.camel.kt.dto.PetDto;
 import br.com.alex.camel.kt.entity.PetEntity;
 import br.com.alex.camel.kt.repository.PetRepository;
+import java.util.List;
 import java.util.Map;
 import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,7 @@ public class PetApi {
   public ResponseEntity<?> fetchPets(@RequestParam Map<String, String> queryParams) {
     String name = queryParams.get("name");
     if (name != null && !name.isEmpty()) {
-      for (PetEntity petEntity : petRepository.findAll()) {
-        if (petEntity.getName().equals(name)) {
-          return ResponseEntity.ok(Lists.newArrayList(convertEntityToDto(petEntity)));
-        }
-      }
+      return ResponseEntity.ok(petRepository.findPetByName(name));
     }
     return ResponseEntity.status(200).body(petRepository.findAll());
   }
@@ -46,4 +43,11 @@ public class PetApi {
     return new PetEntity(pet.getName());
   }
 
+  private List<PetDto> convertEntityToDto(List<PetEntity> petsEntity) {
+    List<PetDto> pets = Lists.newArrayList();
+    for (PetEntity pet : petsEntity) {
+      pets.add(convertEntityToDto(pet));
+    }
+    return pets;
+  }
 }
