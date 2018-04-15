@@ -5,3 +5,4 @@ Feature: Add Pets
     And a new Pet named Marte
     When hitting /pet to add
     Then return status 200
+    And return inserted Pet with name Marte
