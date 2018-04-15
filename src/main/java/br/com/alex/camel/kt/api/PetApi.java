@@ -1,7 +1,7 @@
 package br.com.alex.camel.kt.api;
 
-import br.com.alex.camel.kt.dto.PetDto;
-import java.util.ArrayList;
+import br.com.alex.camel.kt.repository.PetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,16 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PetApi {
 
+  @Autowired
+  private PetRepository petRepository;
+
   @GetMapping("/pets")
   public ResponseEntity<?> fetchPets() {
-    PetDto petDto = new PetDto();
-    petDto.setId(1);
-    petDto.setName("Jupiter");
-
-    ArrayList<Object> pets = new ArrayList<>();
-    pets.add(petDto);
-
-    return ResponseEntity.status(200).body(pets);
+    return ResponseEntity.status(200).body(petRepository.findAll());
   }
 
 }

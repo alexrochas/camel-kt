@@ -1,0 +1,1 @@
+INSERT INTO PETS (ID, NAME) VALUES ('1', 'Jupiter')
