@@ -7,6 +7,7 @@ import br.com.alex.camel.kt.dto.PetDto;
 import cucumber.api.java8.En;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -31,7 +32,7 @@ public class SearchPetStepdefs extends TestConfig implements En {
 
     });
 
-    When("^hitting (.*)$", (endpoint) -> {
+    When("^hitting (.*) to (.*)$", (endpoint, verb) -> {
       RestTemplate restTemplate = new RestTemplateBuilder().build();
 
       ParameterizedTypeReference<List<PetDto>> typeReference = new ParameterizedTypeReference<List<PetDto>>(){};
@@ -40,7 +41,7 @@ public class SearchPetStepdefs extends TestConfig implements En {
       headers.setContentType(MediaType.APPLICATION_JSON);
       HttpEntity<List<PetDto>> entity = new HttpEntity<>(headers);
       ResponseEntity<List<PetDto>> response = restTemplate
-              .exchange("http://localhost:" + port + endpoint, HttpMethod.GET, entity, typeReference);
+              .exchange("http://localhost:" + port + endpoint, ((Map<String, HttpMethod>) world.map.get("verbs")).get(verb), entity, typeReference);
       world.map.put("response", response);
     });
 

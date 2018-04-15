@@ -5,6 +5,13 @@ public class PetDto {
   private Integer id;
   private String name;
 
+  public PetDto() {
+  }
+
+  public PetDto(String name) {
+    this.name = name;
+  }
+
   public Integer getId() {
     return id;
   }
