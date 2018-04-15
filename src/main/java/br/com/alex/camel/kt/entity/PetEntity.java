@@ -12,6 +12,13 @@ public class PetEntity {
   private Integer id;
   private String name;
 
+  public PetEntity() {
+  }
+
+  public PetEntity(String name) {
+    this.name = name;
+  }
+
   public Integer getId() {
     return id;
   }

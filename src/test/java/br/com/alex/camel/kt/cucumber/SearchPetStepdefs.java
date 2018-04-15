@@ -35,13 +35,16 @@ public class SearchPetStepdefs extends TestConfig implements En {
     When("^hitting (.*) to (.*)$", (endpoint, verb) -> {
       RestTemplate restTemplate = new RestTemplateBuilder().build();
 
-      ParameterizedTypeReference<List<PetDto>> typeReference = new ParameterizedTypeReference<List<PetDto>>(){};
+      ParameterizedTypeReference<Object> typeReference = new ParameterizedTypeReference<Object>(){};
       HttpHeaders headers = new HttpHeaders();
       headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
       headers.setContentType(MediaType.APPLICATION_JSON);
       HttpEntity<Object> entity = new HttpEntity<Object>(world.map.getOrDefault("request", ""), headers);
-      ResponseEntity<List<PetDto>> response = restTemplate
-              .exchange("http://localhost:" + port + endpoint, ((Map<String, HttpMethod>) world.map.get("verbs")).get(verb), entity, typeReference);
+      ResponseEntity<Object> response = restTemplate
+              .exchange("http://localhost:" + port + endpoint,
+                      ((Map<String, HttpMethod>) world.map.get("verbs")).get(verb),
+                      entity,
+                      typeReference);
       world.map.put("response", response);
     });
 

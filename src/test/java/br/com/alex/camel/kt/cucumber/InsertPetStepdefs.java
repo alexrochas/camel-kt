@@ -1,10 +1,10 @@
 package br.com.alex.camel.kt.cucumber;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import br.com.alex.camel.kt.dto.PetDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cucumber.api.java8.En;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
@@ -19,12 +19,9 @@ public class InsertPetStepdefs implements En {
     });
 
     And("^return inserted Pet with name (.*)$", (name) -> {
-      assertTrue(((ResponseEntity<List<PetDto>>)world.map.get("response")).getBody()
-              .stream()
-              .filter((p) -> p.getName().equals(name))
-              .findAny()
-              .isPresent()
-      );
+      ObjectMapper objectMapper = new ObjectMapper();
+      assertEquals(objectMapper.convertValue(((ResponseEntity<PetDto>) world.map.get("response")).getBody(),
+              PetDto.class).getName(), name);
     });
   }
 }
