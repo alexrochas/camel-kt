@@ -1,6 +1,7 @@
 package br.com.alex.camel.kt.api;
 
 import br.com.alex.camel.kt.repository.PetRepository;
+import jersey.repackaged.com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class PetApi {
 
   @PostMapping
   public ResponseEntity<?> addPet() {
-    return ResponseEntity.ok(200);
+    return ResponseEntity.ok(Lists.newArrayList());
   }
 
 }
