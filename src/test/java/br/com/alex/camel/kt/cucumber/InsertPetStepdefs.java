@@ -18,7 +18,7 @@ public class InsertPetStepdefs implements En {
       world.map.put("request", new PetDto(name));
     });
 
-    And("^return inserted Pet with name (.*)$", (name) -> {
+    And("^return Pet with name (.*)$", (name) -> {
       ObjectMapper objectMapper = new ObjectMapper();
       assertEquals(objectMapper.convertValue(((ResponseEntity<PetDto>) world.map.get("response")).getBody(),
               PetDto.class).getName(), name);
